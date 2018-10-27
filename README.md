@@ -28,10 +28,7 @@ Win32 Specific:
   * **CS207Project.sln** - The solution file to quickly load the project into Visual Studio
 
 Requirements and Materials
-============
-
-This is where you talk about what sort of libraries are required and what sort of hardware is needed:
-
+-
 Dependencies:
 * energia-1.6.10E18 https://www.energia.nu
 * msp430 command-line flasher https://www.ti.com/tool/msp430-flasher
@@ -48,8 +45,7 @@ Bill of Materials:
 * 1 x MSP4302553
 
 Build Instructions
-==================
-
+-
 Here is where you give specific instructions about how the device is built. The more detail the better -- especially if your build is very complicated. Here you should include schematics of your build: 
 
 ![alt text][pic2]
@@ -70,7 +66,7 @@ And a breadboard view is also a good idea. It gives the potential user a better 
 If there are any special instructions on how to assemble the hardware, we should note it here as well. For example, if the user should solder things in a specific order, you should give them a heads-up. 
 
 Firmware Installation
-=====================
+-
 This is where you should describe how the firmware is installed onto the device. If it's really straightforward you may not need this section. However, if there are multiple libraries and componenets involved -- or if there is some sort of build process, this is a good place to put those instructions. Most users just want to be able to copy-paste and upload the firmware without having to jump through a bunch of hoops. You should set it up for them. For example: 
 
 To install:
@@ -81,7 +77,7 @@ MSP430Flasher.exe -n Unknown -w "MyGameFile_v1.2.txt" -v -g -z [VCC]
 
 
 Usage
-=====
+-
 This is usually where you tell the user how the device works. Do you just upload the software and flip a switch? What sort of things does this thing do? Are there alternate settings / modes / programs that might be good to mention. This is where you tell the user exactly how the device or program is used. For example: 
 
 * Upload the code to the thing. 
@@ -90,17 +86,13 @@ This is usually where you tell the user how the device works. Do you just upload
 * Don't forget to feed the badgers!
 
 Team
-=====
+-
 The build team consists of: 
-* Trevor Tomesh -- I did everything.
-* Joe McSchmoe -- He didn't do anything useful. 
-* Alison Roberts -- She made me food.
-
-Maybe say something about how people can contribute here?
-
+* Matthew Polsom
+"I did everything." - Guy who did everything
 
 Credits
-=======
+-
 
 This is where you give credit to any third parties that you borrowed from. 
 
