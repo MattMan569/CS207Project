@@ -2,29 +2,30 @@ Arduino Video Game Controller via Windows API
 =
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
 
-# in
-The point of this repository is to serve as an example for how one might set-up a repo for an interactive hardware project. There doesn't seem to be any sort of agreement between developers as to how such a repo should be set up --  therefore, I'd like to propose this set-up.
-
-This is where you describe your project in short. This will be where potential users look to understand what your project is about -- and it's your chance to catch their eye. 
-
-This specific project is an MSP430G2553 based game console. It was built for a conference and that's pretty much all I feel like writing about it because this is just an example, after all. It's a good idea to put some sort of picture of your completed project here like this -- but smaller: 
+Introduction
+-
+The repository demonstrates my attempt to create a video game controller with Arduino. The external hardware communicates with the Arduino which interprets the inputs. These interpretations are then sent to the computer via serial to a C++ Win32 GUI application. This application then sends these inputs to a specified running application.
 
 ![alt text][pic1]
 
 [pic1]: https://github.com/trevortomesh/OSHRepo/blob/master/img/img1.jpg "Logo Title Text 2"
 
 Repository Contents
-============
-Here's where you'll provide a map of all the top-level contents (where applicable):
-
-* **/src** - Here's where the software for your device goes (.ino, .cpp).
-* **/hardware** - All the PCB design files / 3D models (.ftz, .brd, .sch, .stl).
-* **/build** - Files that are compiled and ready to run / upload.
-* **/libraries** - Any libraries that are needed to build your software for your device.
+-
 * **/examples** - Example files that can be run on your hardware. 
-* **/img** - This is where the image files for this readme are! Yay!
+* **/img** - This is where the image files for this readme.
 * **/LICENSE** - The license file.
-* **/README.md** - The file you're reading now! :-D
+* **/README.md** - The file you're reading now!
+
+Arduino Specific:
+  * **/src** - Here's where the software for your device goes (.ino, .cpp).
+  * **/hardware** - All the PCB design files / 3D models (.ftz, .brd, .sch, .stl).
+  * **/build** - Files that are compiled and ready to run / upload.
+  * **/libraries** - Any libraries that are needed to build your software for your device.
+
+Win32 Specific:
+  * **/CS207Project** - All files required for the Win32 Application
+  * **CS207Project.sln** - The solution file to quickly load the project into Visual Studio
 
 Requirements and Materials
 ============
