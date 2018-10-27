@@ -1,5 +1,5 @@
-# Arduino Video Game Controller via Windows API
-==================================================
+Arduino Video Game Controller via Windows API
+=
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
 
 # in
