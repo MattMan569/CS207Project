@@ -32,3 +32,8 @@
 #define DEBUG_OFF 0			// No output
 #define DEBUG_ON 1			// Normal output
 #define DEBUG_VERBOSE 2		// Verbose output
+
+// Retrieve the instance handle
+// https://blogs.msdn.microsoft.com/oldnewthing/20041025-00/?p=37483
+EXTERN_C IMAGE_DOS_HEADER __ImageBase;
+#define HINST_THISCOMPONENT ((HINSTANCE)&__ImageBase)
