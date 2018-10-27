@@ -88,8 +88,19 @@ This is usually where you tell the user how the device works. Do you just upload
 Team
 -
 The build team consists of: 
-* Matthew Polsom\
-"I did everything." - Guy who did everything
+* Matthew Polsom
+
+The programming team consists of: 
+* Matthew Polsom
+
+The management team consists of: 
+* Matthew Polsom
+
+The presentation team consists of: 
+* Matthew Polsom
+
+The coffee break team consists of: 
+* Matthew Polsom
 
 Credits
 -
