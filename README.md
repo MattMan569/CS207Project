@@ -88,7 +88,7 @@ This is usually where you tell the user how the device works. Do you just upload
 Team
 -
 The build team consists of: 
-* Matthew Polsom
+* Matthew Polsom\
 "I did everything." - Guy who did everything
 
 Credits
