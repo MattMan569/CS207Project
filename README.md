@@ -1,5 +1,5 @@
-# Repository Title [version number]
-[![License](https://poser.pugx.org/phpunit/phpunit/license)](https://packagist.org/packages/phpunit/phpunit)
+# Arduino Video Game Controller via Windows API
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
 
 The point of this repository is to serve as an example for how one might set-up a repo for an interactive hardware project. There doesn't seem to be any sort of agreement between developers as to how such a repo should be set up --  therefore, I'd like to propose this set-up.
 
