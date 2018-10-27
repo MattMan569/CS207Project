@@ -1,6 +1,8 @@
 # Arduino Video Game Controller via Windows API
+===
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
 
+# in
 The point of this repository is to serve as an example for how one might set-up a repo for an interactive hardware project. There doesn't seem to be any sort of agreement between developers as to how such a repo should be set up --  therefore, I'd like to propose this set-up.
 
 This is where you describe your project in short. This will be where potential users look to understand what your project is about -- and it's your chance to catch their eye. 
