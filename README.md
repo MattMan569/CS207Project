@@ -18,13 +18,11 @@ Repository Contents
 * **/LICENSE** - The license file.
 * **/README.md** - The file you're reading now!
 
-Arduino Specific:
-  * **/src** - Arduino software source code files
-  * **/hardware** - All the PCB design files / 3D models (.ftz, .brd, .sch, .stl).
+* **/src** - All software files for the project
+* **/src/Arduino** - All files required for the Arduino
+* **/src/Win32** - All files required for the Win32 application
 
-Win32 Specific:
-  * **/CS207Project** - All files required for the Win32 Application
-  * **CS207Project.sln** - The solution file to quickly load the Win32 project into Visual Studio
+* **/build** - A pre-built version of the Win32 application
 
 Requirements and Materials
 -
