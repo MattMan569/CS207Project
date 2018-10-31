@@ -19,7 +19,7 @@ Repository Contents
 * **/README.md** - The file you're reading now!
 * **/src** - All software files for the project
 * **/build** - A pre-built version of the Win32 application
-* **/prototype** - Software files for prototyping purposes, as per the project proposal, kept for the purposes of documentation
+* **/prototype** - Files for prototyping purposes, as per the project proposal, kept for the purposes of documentation
 
 Requirements and Materials
 -
