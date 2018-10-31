@@ -5,7 +5,7 @@
 #define DEBUG true
 
 // Serial baud rate
-#define BAUD_RATE 2000000
+#define BAUD_RATE 1000000
 
 
 
