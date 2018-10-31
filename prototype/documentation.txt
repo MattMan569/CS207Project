@@ -8,5 +8,5 @@
   * Base project built with four buttons and confirmed to be working.
   * Deviation from project deadlines due to school activities (CS 375 midterm).
   * The author takes note that Java's (in Processing) weakly typed variables and "willy-nilly" method of variable declartion make the code
-  hard to read.
+    hard to read.
   * Begin the process of learning the Window's API.
