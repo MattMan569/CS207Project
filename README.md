@@ -8,24 +8,23 @@ The repository demonstrates my attempt to create a video game controller with Ar
 
 ![alt text][pic1]
 
+<--
 [pic1]: https://github.com/trevortomesh/OSHRepo/blob/master/img/img1.jpg "Logo Title Text 2"
+-->
 
 Repository Contents
 -
-* **/examples** - Example files that can be run on your hardware. 
 * **/img** - This is where the image files for this readme.
 * **/LICENSE** - The license file.
 * **/README.md** - The file you're reading now!
 
 Arduino Specific:
-  * **/src** - Here's where the software for your device goes (.ino, .cpp).
+  * **/src** - Arduino software source code files
   * **/hardware** - All the PCB design files / 3D models (.ftz, .brd, .sch, .stl).
-  * **/build** - Files that are compiled and ready to run / upload.
-  * **/libraries** - Any libraries that are needed to build your software for your device.
 
 Win32 Specific:
   * **/CS207Project** - All files required for the Win32 Application
-  * **CS207Project.sln** - The solution file to quickly load the project into Visual Studio
+  * **CS207Project.sln** - The solution file to quickly load the Win32 project into Visual Studio
 
 Requirements and Materials
 -
