@@ -17,12 +17,9 @@ Repository Contents
 * **/img** - This is where the image files for this readme.
 * **/LICENSE** - The license file.
 * **/README.md** - The file you're reading now!
-
 * **/src** - All software files for the project
-* **/src/Arduino** - All files required for the Arduino
-* **/src/Win32** - All files required for the Win32 application
-
 * **/build** - A pre-built version of the Win32 application
+* **/prototype** - Software files for prototyping purposes, as per the project proposal, kept for the purposes of documentation
 
 Requirements and Materials
 -
