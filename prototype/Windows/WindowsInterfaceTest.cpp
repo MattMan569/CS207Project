@@ -1,6 +1,7 @@
 /*
     File: WindowsInterfaceTest.cpp
     Purpose: Test interfacing with the windows API to check for input.
+    Date: 1st Nov. 2018
 */
 
 #include <iostream>
