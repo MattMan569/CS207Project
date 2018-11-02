@@ -4,6 +4,8 @@
   Purpose: This file is the slightly modified original from
     https://www.instructables.com/id/Video-Game-Controller-With-Arduino/
     that will serve as the base for my own project to build off of.
+  
+  Date: 31st Oct. 2018
 */
 
 import processing.serial.*;
