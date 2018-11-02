@@ -5,6 +5,8 @@
     https://www.instructables.com/id/Video-Game-Controller-With-Arduino/
     that serves as a proof of concept and a basis for my own project to
     build off of.
+  
+  Date: 31st Oct. 2018
 */
 
 const int ButtonOne = 10;
