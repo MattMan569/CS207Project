@@ -20,3 +20,4 @@
   * Will attempt to send input via Windows messages and the window handle at a later date
   * Much progress made in learning the Windows API
   * Debating on whether to use the Windows API alone or the whole Win32 interface
+  * The last of the required hardware arrived.
