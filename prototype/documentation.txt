@@ -13,3 +13,9 @@
 
 1 Nov.
   * Successfully testing getting and sending keyboard/mouse inputs with the Windows API.
+
+8 Nov.
+  * Got a C++ program to send input, and thus control, an external program
+  * Noted limitations are that the program must be the foreground window to receive the input
+  * Will attempt to send input via Windows messages and the window handle at a later date
+  * Much progress made in learning the Windows API
