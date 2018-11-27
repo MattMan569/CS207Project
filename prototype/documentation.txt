@@ -21,3 +21,14 @@
   * Much progress made in learning the Windows API
   * Debating on whether to use the Windows API alone or the whole Win32 interface
   * The last of the required hardware arrived.
+
+14 Nov.
+  * Additional hardware arrived
+  * Integrated additional hardware into the project
+  * All new inputs confirmed working
+
+14-26 Nov.
+  * Spent the majority of the time testing various elements of the Windows and Win32 APIs
+
+26 Nov.
+  * Working C++ program getting data over serial COM port
