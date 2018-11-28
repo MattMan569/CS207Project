@@ -5,31 +5,44 @@
 */
 
 
+#ifdef UNICODE
+#define tcout std::wcout
+#define tcin std::wcin
+#define tcerr std::wcerr
+#else
+#define tcout std::cout
+#define tcin std::cin
+#define tcerr std::cerr
+#endif
 
-
-#pragma warning(push, 0)        
+#pragma warning(push, 0);
 #include <Windows.h>
 #include <tchar.h>
 #include <Psapi.h>
 #include <iostream>
 #include <string>
-#pragma warning(pop)
+#include <thread>
+#include <chrono>
+#pragma warning(pop);
 
 
 
 
 INT _tmain(INT argc, TCHAR *argv[])
 {
+	UNREFERENCED_PARAMETER(argc);
+	UNREFERENCED_PARAMETER(argv);
+
 	// Get the character to send to the window
 	TCHAR KeyToSend = {};
-	std::cout << "Enter the key to send: ";
-	std::cin >> KeyToSend;
-	KeyToSend = toupper(KeyToSend);
-
+	tcout << "Enter the key to send: ";
+	tcin >> KeyToSend;
+	KeyToSend = (TCHAR)toupper(KeyToSend);
+	
 	// Get the title of the window to match against
 	TCHAR TitleMatch[MAX_PATH] = {};
-	std::cout << "Enter a window title to match against: ";
-	std::cin >> TitleMatch;
+	tcout << "Enter a window title to match against: ";
+	tcin >> TitleMatch;
 
 	// Don't match against the console window
 	TCHAR ConsoleTitle[MAX_PATH] = {};
@@ -44,7 +57,7 @@ INT _tmain(INT argc, TCHAR *argv[])
 		Window = FindWindowEx(NULL, Window, NULL, NULL);
 		if (Window == NULL)
 		{
-			std::cerr << "No windows found!" << std::endl;
+			tcerr << "No windows found!" << std::endl;
 			return 1;
 		}
 		
@@ -57,22 +70,19 @@ INT _tmain(INT argc, TCHAR *argv[])
 		}
 	}
 
-	std::cout << "Window found: " << WindowTitle << std::endl;
+	tcout << "Window found: " << WindowTitle << std::endl;
 
 	// Set the focus on the window, making it receive all inputs
 	SetForegroundWindow(Window);
-	
 
-	// TODO: Attempt to send messages via window handle
-//	HWND hWnd = GetForegroundWindow();
-//	SendMessage(hWnd, WM_KEYDOWN, NULL, (LPARAM)_TEXT("Hello, world!"));
-	
+	// Wait for the window to become active
+	while (!GetForegroundWindow());
 
-	// Send the specified input
-	INPUT ip = {};
-	ip.type = INPUT_KEYBOARD;
-	ip.ki.wVk = KeyToSend;
-	SendInput(1, &ip, sizeof(INPUT));
+	// Get the handle of the newly active window
+	HWND hWnd = GetForegroundWindow();
+
+	// Send a message to the window
+	PostMessage(hWnd, WM_CHAR, KeyToSend, NULL);
 	
 	return 0;
 }
