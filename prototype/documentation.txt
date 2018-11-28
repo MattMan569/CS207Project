@@ -38,3 +38,5 @@
   
 28 Nov.
   * Finished all testing for COM communication with Arduino
+  * Showing all available COM ports in friendly names for user selection
+  * Begin integrating concepts from tests into a central project
