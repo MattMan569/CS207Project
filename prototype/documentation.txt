@@ -35,3 +35,6 @@
 
 27 Nov.
   * Successfully got the window handle via window title and stored it. This allows for the focus on the window to be lost while still sending messages to it.
+  
+28 Nov.
+  * Finished all testing for COM communication with Arduino
