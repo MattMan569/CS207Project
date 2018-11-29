@@ -6,12 +6,6 @@ Introduction
 -
 The repository demonstrates my attempt to create a video game controller with Arduino. The external hardware communicates with the Arduino which interprets the inputs. These interpretations are then sent to the computer via serial to a C++ Win32 GUI application. This application then sends these inputs to a specified running application.
 
-![alt text][pic1]
-
-<--
-[pic1]: https://github.com/trevortomesh/OSHRepo/blob/master/img/img1.jpg "Logo Title Text 2"
--->
-
 Repository Contents
 -
 * **/img** - This is where the image files for this readme.
