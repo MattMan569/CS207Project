@@ -31,14 +31,13 @@ Dependencies:
 * Setupapi.lib - Included in Windows SDK and Visual Studio development kit
 
 Bill of Materials:
-* 4 x push buttons
-* 12 x green LEDs
-* 1 x 4.7k resistor
-* 4 x 220 ohm resistor
-* 1 x slide switch
-* 1 x battery holder
+* 1 x Arduino (any model or equivalent brand)
+* 1 x Arduino to USB cable
 * 1 x breadboard
-* 1 x MSP4302553
+* _count_ buttons
+* 1 x joystick
+* _count_ wires
+* 1 x Windows computer
 
 Build Instructions
 -
