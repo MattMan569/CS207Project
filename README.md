@@ -51,17 +51,6 @@ And a breadboard view is also a good idea. It gives the potential user a better 
 
 If there are any special instructions on how to assemble the hardware, we should note it here as well. For example, if the user should solder things in a specific order, you should give them a heads-up. 
 
-Firmware Installation
--
-This is where you should describe how the firmware is installed onto the device. If it's really straightforward you may not need this section. However, if there are multiple libraries and componenets involved -- or if there is some sort of build process, this is a good place to put those instructions. Most users just want to be able to copy-paste and upload the firmware without having to jump through a bunch of hoops. You should set it up for them. For example: 
-
-To install:
-```bash
-MSP430Flasher.exe -n Unknown -w "MyGameFile_v1.2.txt" -v -g -z [VCC]
-
-```
-
-
 Usage
 -
 This is usually where you tell the user how the device works. Do you just upload the software and flip a switch? What sort of things does this thing do? Are there alternate settings / modes / programs that might be good to mention. This is where you tell the user exactly how the device or program is used. For example: 
