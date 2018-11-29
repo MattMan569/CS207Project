@@ -18,9 +18,7 @@ Repository Contents
 Requirements and Materials
 -
 Dependencies:
-* energia-1.6.10E18 https://www.energia.nu
-* msp430 command-line flasher https://www.ti.com/tool/msp430-flasher
-* important libraries that need to be installed
+* Setupapi.lib - Included in Windows SDK and Visual Studio development kit
 
 Bill of Materials:
 * 4 x push buttons
