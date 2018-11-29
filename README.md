@@ -4,7 +4,7 @@ Arduino Video Game Controller via Windows API
 
 Introduction
 -
-The repository demonstrates my attempt to create a video game controller with Arduino. The external hardware communicates with the Arduino which interprets the inputs. These interpretations are then sent to the computer via serial to a C++ Win32 GUI application. This application then sends these inputs to a specified running application.
+This repository demonstrates my attempt to create a video game controller with Arduino. A user created controller is connected to the Arduino. This controller sends its inputs to the Arduino which in turn then sends data to the target computer via USB. An intermediate C++ program employs the Windows API to then read these inputs from the COM port and send the corresponding inputs to the most foreground application.
 
 Repository Contents
 -
