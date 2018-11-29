@@ -55,10 +55,10 @@ Usage
 -
 This is usually where you tell the user how the device works. Do you just upload the software and flip a switch? What sort of things does this thing do? Are there alternate settings / modes / programs that might be good to mention. This is where you tell the user exactly how the device or program is used. For example: 
 
-* Upload the code to the thing. 
-* Turn the thing on. 
-* The thing will do a thing and it'll be really cool. 
-* Don't forget to feed the badgers!
+* Plug the Arduino into the target Windows computer via USB
+* Start the intermediate C++ program on the target computer
+* Bring the target appliction to the foreground (click on it)
+* Use your Arduino controller to send input to the target application
 
 Team
 -
