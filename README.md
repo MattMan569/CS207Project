@@ -6,6 +6,16 @@ Introduction
 -
 This repository demonstrates my attempt to create a video game controller with Arduino. A user created controller is connected to the Arduino. This controller sends its inputs to the Arduino which in turn then sends data to the target computer via USB. An intermediate C++ program employs the Windows API to then read these inputs from the COM port and send the corresponding inputs to the most foreground application.
 
+How It Works
+-
+Controller:<br />
+The controller is a very simple and easily modifiable hardware setup. In its current state all it contains is a number of buttons and a single joystick. These inputs are then connected to the connected Arduino.
+
+Arduino:<br />
+
+Windows:<br />
+
+
 Repository Contents
 -
 * **/img** - This is where the image files for this readme.
