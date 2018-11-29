@@ -57,6 +57,7 @@ This is usually where you tell the user how the device works. Do you just upload
 
 * Plug the Arduino into the target Windows computer via USB
 * Start the intermediate C++ program on the target computer
+* Select the COM port the Arduino is connected to in the C++ program
 * Bring the target appliction to the foreground (click on it)
 * Use your Arduino controller to send input to the target application
 
