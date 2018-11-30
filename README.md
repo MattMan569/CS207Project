@@ -34,7 +34,7 @@ Bill of Materials:
 * 1 x Arduino (any model or equivalent brand)
 * 1 x Arduino to USB cable
 * 1 x breadboard
-* _count_ buttons
+* 14 x momentary pushbuttons
 * 1 x joystick
 * _count_ wires
 * 1 x Windows computer
