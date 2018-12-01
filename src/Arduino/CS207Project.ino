@@ -109,7 +109,9 @@ int loop()
     LOG("\t\t");
     LOGN(gpio);
 
-    Serial.println(enumerateInputs(gpio));
+    String enumerated = enumerateInputs(gpio);
+    if (enumerated == "") continue;
+    else Serial.println(enumerated);
   }
   
   return 0;
