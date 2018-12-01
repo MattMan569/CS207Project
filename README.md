@@ -8,13 +8,13 @@ This repository demonstrates my attempt to create a video game controller with A
 
 How It Works
 -
-Controller:<br />
+<b>Controller:</b><br />
 The controller, in its current setup, has a number of buttons and a joystick. This layout has one button for each button on a Nintendo 64 controller as well as an analog joystick. The inputs from the buttons are loaded into two MCP23008 ICs as a means of reducing the required number of wires between the breadboard and Arduino. These values can then be read by the Arduino via the I2C Wire connection. The joystick values are input directly into the Arduino's analog input pins.
 
-Arduino:<br />
+<b>Arduino:</b><br />
 The Arduino is responsible for collecting the incoming data from the controller, processing it, and sending the necessary information to the intermediate C++ program via its USB connection to a Windows computer COM port. The Arduino continuously polls for incoming information from the controller's ICs as well as the connected analog pins. If a particular input state is set, the Arduino will send a message via USB to the intermediate C++ program providing this information. The Arduino is also responsible for configuring the MCP23008s on the controller.
 
-Windows:<br />
+<b>Windows:</b><br />
 
 
 Repository Contents
