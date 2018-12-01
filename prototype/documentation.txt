@@ -40,3 +40,13 @@
   * Finished all testing for COM communication with Arduino
   * Showing all available COM ports in friendly names for user selection
   * Begin integrating concepts from tests into a central project
+
+29 Nov.
+  * Begin work on final hardware configuration
+  * Successfully inputting all needed data into external program via Windows API
+
+30 Nov.
+  * Finish all hardware implementation, final design decided upon and completed
+  * Arduino code for final hardware design completed, no further revisions expected
+  * Begin work on processing serial input on intermediate C++ program
+  * Begin work on mapping serial input data to outgoing key commands
