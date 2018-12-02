@@ -9,7 +9,7 @@
 
 #pragma warning(push, 0);
 
-// User headers
+// Third party headers
 #include "SerialClass.h"
 
 // Windows headers
@@ -30,5 +30,11 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <algorithm>
+#include <ctime>
+#include <iomanip>
 
 #pragma warning(pop);
+
+// Custom headers
+
