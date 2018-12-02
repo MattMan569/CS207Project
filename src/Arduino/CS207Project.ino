@@ -80,8 +80,6 @@ int loop()
 {
   while (true)
   {
-    Serial.flush();
-
     unsigned short gpio{0};
 
     // Read the input from IC1
@@ -107,11 +105,19 @@ int loop()
     gpio |= Wire.read();
 
     LOG("\t\t");
-    LOGN(gpio);
+    LOG(gpio);
 
-    String enumerated = enumerateInputs(gpio);
-    if (enumerated == "") continue;
-    else Serial.println(enumerated);
+    // Only output when there is data to send
+    unsigned long enumerated = enumerateInputs(gpio);
+    if (enumerated == 0x0)
+    {
+      continue;
+    }
+    else
+    {
+      Serial.flush();
+      Serial.println(enumerated);
+    }
   }
   
   return 0;
@@ -122,31 +128,35 @@ int loop()
 
 // Enumerate all inputs and check if its corresponding bit is set.
 // Also check the joystick input.
-String enumerateInputs(const unsigned short & gpio)
+unsigned long enumerateInputs(const unsigned short & gpio)
 {
-  String inputs{""};
+  unsigned long inputs{0x0};
 
   // Check all MCP23008 inputs
-  ifn (A & gpio)       inputs += "a:";
-  ifn (B & gpio)       inputs += "b:";
-  ifn (Z & gpio)       inputs += "z:";
-  ifn (RB & gpio)      inputs += "rb:";
-  ifn (LB & gpio)      inputs += "lb:";
-  ifn (C_LEFT & gpio)  inputs += "cl:";
-  ifn (C_UP & gpio)    inputs += "cu:";
-  ifn (C_RIGHT & gpio) inputs += "cr:";
-  ifn (C_DOWN & gpio)  inputs += "cd:";
-  ifn (D_LEFT & gpio)  inputs += "dl:";
-  ifn (D_UP & gpio)    inputs += "du:";
-  ifn (D_RIGHT & gpio) inputs += "dr:";
-  ifn (D_DOWN & gpio)  inputs += "dd:";
-  ifn (START & gpio)   inputs += "s:";
+  // Set the appropriate bit if an input is active
+  ifn (A & gpio)       inputs |= 0x1;
+  ifn (B & gpio)       inputs |= 0x2;
+  ifn (Z & gpio)       inputs |= 0x4;
+  ifn (START & gpio)   inputs |= 0x8;
+  ifn (LB & gpio)      inputs |= 0x10;
+  ifn (RB & gpio)      inputs |= 0x20;
+  ifn (C_LEFT & gpio)  inputs |= 0x40;
+  ifn (C_UP & gpio)    inputs |= 0x80;
+  ifn (C_RIGHT & gpio) inputs |= 0x100;
+  ifn (C_DOWN & gpio)  inputs |= 0x200;
+  ifn (D_LEFT & gpio)  inputs |= 0x400;
+  ifn (D_UP & gpio)    inputs |= 0x800;
+  ifn (D_RIGHT & gpio) inputs |= 0x1000;
+  ifn (D_DOWN & gpio)  inputs |= 0x2000;
 
   // Check the joystick input
-  if (analogRead(JOY_X) > (JOY_CENTRE + JOY_DEADZONE)) inputs += "l:";  // Left
-  if (analogRead(JOY_X) < (JOY_CENTRE - JOY_DEADZONE)) inputs += "r:";  // Right
-  if (analogRead(JOY_Y) > (JOY_CENTRE + JOY_DEADZONE)) inputs += "d:";  // Down
-  if (analogRead(JOY_Y) < (JOY_CENTRE - JOY_DEADZONE)) inputs += "u:";  // Up
+  if (analogRead(JOY_X) > (JOY_CENTRE + JOY_DEADZONE)) inputs |= 0x4000;   // Left
+  if (analogRead(JOY_X) < (JOY_CENTRE - JOY_DEADZONE)) inputs |= 0x8000;   // Right
+  if (analogRead(JOY_Y) > (JOY_CENTRE + JOY_DEADZONE)) inputs |= 0x10000;  // Down
+  if (analogRead(JOY_Y) < (JOY_CENTRE - JOY_DEADZONE)) inputs |= 0x20000;  // Up
+
+  LOG("\t\t");
+  LOGN(inputs);
 
   return inputs;
 }
