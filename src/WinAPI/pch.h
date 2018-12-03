@@ -5,8 +5,10 @@
 
 #pragma once
 
+// Require the setupapi library
 #pragma comment (lib, "Setupapi.lib")
 
+// Suppress warning from headers that aren't ours
 #pragma warning(push, 0);
 
 // Third party headers
@@ -34,7 +36,5 @@
 #include <ctime>
 #include <iomanip>
 
+// Allow warnings again
 #pragma warning(pop);
-
-// Custom headers
-
