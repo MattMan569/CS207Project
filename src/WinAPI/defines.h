@@ -11,33 +11,48 @@
 #undef DEBUG
 
 // Debug mode
-#define DEBUG TRUE
+#define DEBUG FALSE
 
 
 // Typedefs
-typedef unsigned long uint32;
-typedef unsigned __int64 uint64;
+typedef signed char			int8;
+typedef short				int16;
+typedef long				int32;
+typedef long long			int64;
+typedef unsigned char		uint8;
+typedef unsigned short		uint16;
+typedef unsigned long		uint32;
+typedef unsigned long long	uint64;
+
+
+// Delay cycles to wait for the Arduino when connecting
+#define ARDUINO_DELAY_CYCLES 3
+
+
+// Time to delay when printing a ticking "please wait" message
+#define WAIT_MSG_DELAY_MS 200
 
 
 // Bitwise position of the various inputs
-constexpr unsigned long A =			0x1;
-constexpr unsigned long B =			0x2;
-constexpr unsigned long Z =			0x4;
-constexpr unsigned long START =		0x8;
-constexpr unsigned long LB =		0x10;
-constexpr unsigned long RB =		0x20;
-constexpr unsigned long C_LEFT =	0x40;
-constexpr unsigned long C_UP =		0x80;
-constexpr unsigned long C_RIGHT =	0x100;
-constexpr unsigned long C_DOWN =	0x200;
-constexpr unsigned long D_LEFT =	0x400;
-constexpr unsigned long D_UP =		0x800;
-constexpr unsigned long D_RIGHT =	0x1000;
-constexpr unsigned long D_DOWN =	0x2000;
-constexpr unsigned long JOY_LEFT =	0x4000;
-constexpr unsigned long JOY_RIGHT =	0x8000;
-constexpr unsigned long JOY_DOWN =	0x10000;
-constexpr unsigned long JOY_UP =	0x20000;
+constexpr unsigned long RESERVED =	0x1UL;		// Reserved value
+constexpr unsigned long A =			0x2UL;		// Buttons
+constexpr unsigned long B =			0x4UL;
+constexpr unsigned long Z =			0x8UL;
+constexpr unsigned long START =		0x10UL;
+constexpr unsigned long LB =		0x20UL;		// Bumpers
+constexpr unsigned long RB =		0x40UL;
+constexpr unsigned long C_LEFT =	0x80UL;		// Action buttons
+constexpr unsigned long C_UP =		0x100UL;
+constexpr unsigned long C_RIGHT =	0x200UL;
+constexpr unsigned long C_DOWN =	0x400UL;
+constexpr unsigned long D_LEFT =	0x800UL;	// D Pad
+constexpr unsigned long D_UP =		0x1000UL;
+constexpr unsigned long D_RIGHT =	0x2000UL;
+constexpr unsigned long D_DOWN =	0x4000UL;
+constexpr unsigned long JOY_LEFT =	0x8000UL;	// Joystick
+constexpr unsigned long JOY_RIGHT =	0x10000UL;
+constexpr unsigned long JOY_DOWN =	0x20000UL;
+constexpr unsigned long JOY_UP =	0x40000UL;
 
 
 // Change the definition of cout, cin, and cerr depending on if
@@ -66,7 +81,7 @@ constexpr unsigned long JOY_UP =	0x20000;
 
 
 // Overloaded ostream operators for variadic macros
-// Author: CygnusX1 at https://stackoverflow.com/questions/29326460/how-to-make-a-variadic-macro-for-stdcout
+// Original from: https://stackoverflow.com/a/29326744
 template <typename T>
 std::ostream& operator,(std::ostream& out, const T& t) {
 	out << t;
