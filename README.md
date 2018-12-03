@@ -81,6 +81,9 @@ Team
 
 Credits
 -
+* https://www.instructables.com/id/Video-Game-Controller-With-Arduino/ - Original project
+* http://www.learningaboutelectronics.com/Articles/MCP23008-IO-port-expander-circuit-with-arduino.php - MCP23008 introduction
+* http://www.learningaboutelectronics.com/Articles/Read-input-from-an-MCP230xx-IO-port-expander-connected-to-an-arduino.php - MCP23008 examples
 * http://playground.arduino.cc/Interfacing/CPPWindows - Serial communication library
 * https://stackoverflow.com/a/29326744 - Overloaded ostream operators for variadic macro communication
 * https://stackoverflow.com/a/45613884 - Retrieve the list of currently active COM ports and print friendly names
