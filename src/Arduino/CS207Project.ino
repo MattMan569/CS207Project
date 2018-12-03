@@ -107,17 +107,9 @@ int loop()
     LOG("\t\t");
     LOG(gpio);
 
-    // Only output when there is data to send
-    unsigned long enumerated = enumerateInputs(gpio);
-    if (enumerated == 0x0)
-    {
-      continue;
-    }
-    else
-    {
-      Serial.flush();
-      Serial.println(enumerated);
-    }
+    // Send the enumerated input to the C++ program
+    Serial.flush();
+    Serial.println(enumerateInputs(gpio));
   }
   
   return 0;
@@ -130,30 +122,31 @@ int loop()
 // Also check the joystick input.
 unsigned long enumerateInputs(const unsigned short & gpio)
 {
-  unsigned long inputs{0x0};
+  unsigned long inputs{0x1};
 
   // Check all MCP23008 inputs
   // Set the appropriate bit if an input is active
-  ifn (A & gpio)       inputs |= 0x1;
-  ifn (B & gpio)       inputs |= 0x2;
-  ifn (Z & gpio)       inputs |= 0x4;
-  ifn (START & gpio)   inputs |= 0x8;
-  ifn (LB & gpio)      inputs |= 0x10;
-  ifn (RB & gpio)      inputs |= 0x20;
-  ifn (C_LEFT & gpio)  inputs |= 0x40;
-  ifn (C_UP & gpio)    inputs |= 0x80;
-  ifn (C_RIGHT & gpio) inputs |= 0x100;
-  ifn (C_DOWN & gpio)  inputs |= 0x200;
-  ifn (D_LEFT & gpio)  inputs |= 0x400;
-  ifn (D_UP & gpio)    inputs |= 0x800;
-  ifn (D_RIGHT & gpio) inputs |= 0x1000;
-  ifn (D_DOWN & gpio)  inputs |= 0x2000;
+  // 0x1 is reserved
+  ifn (A & gpio)       inputs |= 0x2;
+  ifn (B & gpio)       inputs |= 0x4;
+  ifn (Z & gpio)       inputs |= 0x8;
+  ifn (START & gpio)   inputs |= 0x10;
+  ifn (LB & gpio)      inputs |= 0x20;
+  ifn (RB & gpio)      inputs |= 0x40;
+  ifn (C_LEFT & gpio)  inputs |= 0x80;
+  ifn (C_UP & gpio)    inputs |= 0x100;
+  ifn (C_RIGHT & gpio) inputs |= 0x200;
+  ifn (C_DOWN & gpio)  inputs |= 0x400;
+  ifn (D_LEFT & gpio)  inputs |= 0x800;
+  ifn (D_UP & gpio)    inputs |= 0x1000;
+  ifn (D_RIGHT & gpio) inputs |= 0x2000;
+  ifn (D_DOWN & gpio)  inputs |= 0x4000;
 
   // Check the joystick input
-  if (analogRead(JOY_X) > (JOY_CENTRE + JOY_DEADZONE)) inputs |= 0x4000;   // Left
-  if (analogRead(JOY_X) < (JOY_CENTRE - JOY_DEADZONE)) inputs |= 0x8000;   // Right
-  if (analogRead(JOY_Y) > (JOY_CENTRE + JOY_DEADZONE)) inputs |= 0x10000;  // Down
-  if (analogRead(JOY_Y) < (JOY_CENTRE - JOY_DEADZONE)) inputs |= 0x20000;  // Up
+  if (analogRead(JOY_X) > (JOY_CENTRE + JOY_DEADZONE)) inputs |= 0x8000;   // Left
+  if (analogRead(JOY_X) < (JOY_CENTRE - JOY_DEADZONE)) inputs |= 0x10000;  // Right
+  if (analogRead(JOY_Y) > (JOY_CENTRE + JOY_DEADZONE)) inputs |= 0x20000;  // Down
+  if (analogRead(JOY_Y) < (JOY_CENTRE - JOY_DEADZONE)) inputs |= 0x40000;  // Up
 
   LOG("\t\t");
   LOGN(inputs);
