@@ -10,6 +10,10 @@ This repository demonstrates my attempt to create a video game controller with A
 
 [pic2]: https://github.com/MattMan569/CS207Project/blob/master/img/build_pic.jpg "CS 207 Build Picture"
 
+![alt text][pic3]
+
+[pic3]: https://github.com/MattMan569/CS207Project/blob/master/img/build_exe.png "CS 207 Exe Console"
+
 How It Works
 -
 <b>Controller:</b><br />
