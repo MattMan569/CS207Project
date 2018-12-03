@@ -46,7 +46,11 @@ Bill of Materials:
 
 Build Instructions
 -
-Here is where you give specific instructions about how the device is built. The more detail the better -- especially if your build is very complicated. Here you should include schematics of your build: 
+Here is where you give specific instructions about how the device is built. The more detail the better -- especially if your build is very complicated. Here you should include schematics of your build:
+
+![alt text][pic1]
+
+[pic1]: https://github.com/MattMan569/CS207Project/blob/master/img/cs207_schem.png "CS 207 Build Schematic"
 
 ![alt text][pic2]
 
