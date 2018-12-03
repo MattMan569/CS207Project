@@ -15,7 +15,7 @@ The controller, in its current setup, has a number of buttons and a joystick. Th
 The Arduino is responsible for collecting the incoming data from the controller, processing it, and sending the necessary information to the intermediate C++ program via its USB connection to a Windows computer COM port. The Arduino continuously polls for incoming information from the controller's ICs as well as the connected analog pins. If a particular input state is set, the Arduino will send a message via USB to the intermediate C++ program providing this information. The Arduino is also responsible for configuring the MCP23008s on the controller.
 
 <b>Windows:</b><br />
-
+The Windows C++ program collects the incoming informaton from a specified COM port. It will perform bitwise operations on the incoming data to determine which inputs are currently active and then make the appropriate operations based on this current state as well as previous states. The end result is these inputs being output to an external program.
 
 Repository Contents
 -
@@ -23,6 +23,9 @@ Repository Contents
 * **/LICENSE** - The license file.
 * **/README.md** - The file you're reading now!
 * **/src** - All software files for the project
+  * */src/Arduino* - All code required for the Arduino program
+  * */src/WinAPI* - All code required for the Windows program
+  * */src/Win32* - Code for a planned Win32 expansion of the WinAPI code. Currently defunct.
 * **/build** - A pre-built version of the Win32 application
 * **/prototype** - Files for prototyping purposes, as per the project proposal, kept for the purposes of documentation
 
