@@ -26,7 +26,7 @@ Repository Contents
   * */src/Arduino* - All code required for the Arduino program
   * */src/WinAPI* - All code required for the Windows program
   * */src/Win32* - Code for a planned Win32 expansion of the WinAPI code. Currently defunct.
-* **/build** - A pre-built version of the Win32 application
+* **/build** - A pre-built version of the WinAPI application
 * **/prototype** - Files for prototyping purposes, as per the project proposal, kept for the purposes of documentation
 
 Requirements and Materials
