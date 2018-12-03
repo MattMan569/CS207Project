@@ -8,7 +8,7 @@ This repository demonstrates my attempt to create a video game controller with A
 
 ![alt text][pic2]
 
-[pic2]: https://github.com/MattMan569/CS207Project/blob/master/img/build_picture.jpg "CS 207 Build Picture"
+[pic2]: https://github.com/MattMan569/CS207Project/blob/master/img/build_pic.jpg "CS 207 Build Picture"
 
 How It Works
 -
