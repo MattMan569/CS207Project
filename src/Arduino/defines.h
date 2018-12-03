@@ -14,7 +14,7 @@
 
 
 // Serial baud rate
-#define BAUD_RATE 1000000
+#define BAUD_RATE 2000000
 
 
 // Debug only output
