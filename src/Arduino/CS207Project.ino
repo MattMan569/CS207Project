@@ -1,66 +1,155 @@
 /*
- * File: defines.h
+ * File: CS207Project.ino
  * Author: Matthew Polsom
- * Purpose: This file contains all preprocessor definitions for the program
- *          such as pin numbers, macros, and addresses
+ * Purpose: This file is the entry point and point of processing all inputs
+ *          and sending the corresponding outputs via serial.
  */
 
 
-#pragma once
+// Use our own main, setup, and loop functions
+#define setup ARDUINO_SETUP
+#define loop ARDUINO_LOOP
+#include <Arduino.h>
+#undef setup
+#undef loop
+
+#include "defines.h"
+
+#include <Wire.h>
 
 
-// Debug mode
-#define DEBUG false
 
 
-// Serial baud rate
-#define BAUD_RATE 2000000
+int main()
+{
+  init();
+  Serial.begin(BAUD_RATE);
+
+  // Run setup
+  Serial.print("setup_begin:");
+  setup();
+  Serial.print("setup_end:");
+
+  // Run the loop
+  Serial.print("loop_begin:");
+  while(loop());
+  Serial.print("loop_end:");
+  
+  return 0;
+}
 
 
-// Debug only output
+
+
+void setup()
+{
 #if DEBUG
-#define LOG(X) Serial.flush(); Serial.print(X)
-#define LOGN(X) Serial.flush(); Serial.println(X)
+  Serial.print("debug_on:");
 #else
-#define LOG(X) NULL
-#define LOGN(X) NULL
+  Serial.print("debug_off:");
 #endif
 
+  // Start the I2C communication
+  Wire.begin();
 
-// If not
-#define ifn(X) if(!(X))
+  //Set all GPIO pins to input mode
+  Wire.beginTransmission(IC1);
+  Wire.write(IODIR);
+  Wire.write(0b11111111);
+  Wire.endTransmission();
+  Wire.beginTransmission(IC2);
+  Wire.write(IODIR);
+  Wire.write(0b11111111);
+  Wire.endTransmission();
 
-
-// MCP23008 definitions
-#define IC1     0x20  // The first MCP23008 at address 0x20
-#define IC2     0x22  // The second MCP23008 at address 0x22
-#define IODIR   0x00  // The IODIR register is at address 0x00
-#define GPPU    0x06  // The GPPU register is at address 0x06
-#define GPIO    0x09  // The GPIO register is at address 0x09
-
-
-// Controller bitwise input positions in the MCP23008 ICs
-#define C_DOWN    0x1
-#define C_RIGHT   0x2
-#define A         0x4
-#define C_UP      0x8
-#define B         0x10
-#define C_LEFT    0x20
-#define Z         0x40
-#define RB        0x80
-#define LB        0x100
-#define D_RIGHT   0x200
-#define D_DOWN    0x400
-#define D_UP      0x800
-#define D_LEFT    0x1000
-#define START     0x2000
+  // Enable the internal pull-up resistor on all pins
+  Wire.beginTransmission(IC1);
+  Wire.write(GPPU);
+  Wire.write(0b11111111);
+  Wire.endTransmission();
+  Wire.beginTransmission(IC2);
+  Wire.write(GPPU);
+  Wire.write(0b11111111);
+  Wire.endTransmission();
+}
 
 
-// Joystick pins
-#define JOY_Y       A0
-#define JOY_X       A1
-#define JOY_CLICK   A2
 
-// Joystick values
-#define JOY_CENTRE 518
-#define JOY_DEADZONE 100
+
+int loop()
+{
+  while (true)
+  {
+    unsigned short gpio{0};
+
+    // Read the input from IC1
+    Wire.beginTransmission(IC1);
+    Wire.write(GPIO);
+    Wire.endTransmission();
+    Wire.requestFrom(IC1, 1);
+    gpio |= Wire.read();
+    
+    LOG(gpio);
+    LOG("\t\t");
+    
+    // Shift the bits by one byte to make room for IC2's input
+    gpio = gpio << 8;
+    
+    LOG(gpio);
+
+    // Read the input from IC2
+    Wire.beginTransmission(IC2);
+    Wire.write(GPIO);
+    Wire.endTransmission();
+    Wire.requestFrom(IC2, 1);
+    gpio |= Wire.read();
+
+    LOG("\t\t");
+    LOG(gpio);
+
+    // Send the enumerated input to the C++ program
+    Serial.flush();
+    Serial.println(enumerateInputs(gpio));
+  }
+  
+  return 0;
+}
+
+
+
+
+// Enumerate all inputs and check if its corresponding bit is set.
+// Also check the joystick input.
+unsigned long enumerateInputs(const unsigned short & gpio)
+{
+  unsigned long inputs{0x1};
+
+  // Check all MCP23008 inputs
+  // Set the appropriate bit if an input is active
+  // 0x1 is reserved
+  ifn (A & gpio)       inputs |= 0x2;
+  ifn (B & gpio)       inputs |= 0x4;
+  ifn (Z & gpio)       inputs |= 0x8;
+  ifn (START & gpio)   inputs |= 0x10;
+  ifn (LB & gpio)      inputs |= 0x20;
+  ifn (RB & gpio)      inputs |= 0x40;
+  ifn (C_LEFT & gpio)  inputs |= 0x80;
+  ifn (C_UP & gpio)    inputs |= 0x100;
+  ifn (C_RIGHT & gpio) inputs |= 0x200;
+  ifn (C_DOWN & gpio)  inputs |= 0x400;
+  ifn (D_LEFT & gpio)  inputs |= 0x800;
+  ifn (D_UP & gpio)    inputs |= 0x1000;
+  ifn (D_RIGHT & gpio) inputs |= 0x2000;
+  ifn (D_DOWN & gpio)  inputs |= 0x4000;
+
+  // Check the joystick input
+  if (analogRead(JOY_X) > (JOY_CENTRE + JOY_DEADZONE)) inputs |= 0x8000;   // Left
+  if (analogRead(JOY_X) < (JOY_CENTRE - JOY_DEADZONE)) inputs |= 0x10000;  // Right
+  if (analogRead(JOY_Y) > (JOY_CENTRE + JOY_DEADZONE)) inputs |= 0x20000;  // Down
+  if (analogRead(JOY_Y) < (JOY_CENTRE - JOY_DEADZONE)) inputs |= 0x40000;  // Up
+
+  LOG("\t\t");
+  LOGN(inputs);
+
+  return inputs;
+}
