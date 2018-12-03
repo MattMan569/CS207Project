@@ -50,3 +50,14 @@
   * Arduino code for final hardware design completed, no further revisions expected
   * Begin work on processing serial input on intermediate C++ program
   * Begin work on mapping serial input data to outgoing key commands
+  
+1 Dec.
+  * Changed method of Arduino output to integral type instead of character type to reduce errors and increase speed
+  * Changed C++ program to match Arduino data
+
+2 Dec.
+  * Basic formation of the final data path Arduino->C++->Windows Program is done
+  * Testing and debugging of data transfer
+
+3 Dec.
+  * Project in complete working order, no known bugs left
