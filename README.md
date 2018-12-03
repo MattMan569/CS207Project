@@ -81,6 +81,6 @@ Team
 
 Credits
 -
-This is where you give credit to any third parties that you borrowed from. 
-
-* MSDN - Excellent documentation for the Windows API
+* http://playground.arduino.cc/Interfacing/CPPWindows - Serial communication library
+* https://stackoverflow.com/a/29326744 - Overloaded ostream operators for variadic macro communication
+* https://stackoverflow.com/a/45613884 - Retrieve the list of currently active COM ports and print friendly names
