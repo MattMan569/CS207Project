@@ -33,14 +33,15 @@ Requirements and Materials
 -
 Dependencies:
 * Setupapi.lib - Included in Windows SDK and Visual Studio development kit
+* Arduino & CPP Serial Library (included) - http://playground.arduino.cc/Interfacing/CPPWindows
 
 Bill of Materials:
 * 1 x Arduino (any model or equivalent brand)
 * 1 x Arduino to USB cable
-* 1 x breadboard
+* 1 x large breadboard
 * 14 x momentary pushbuttons
 * 1 x joystick
-* _count_ wires
+* 57 x wires
 * 1 x Windows computer
 
 Build Instructions
