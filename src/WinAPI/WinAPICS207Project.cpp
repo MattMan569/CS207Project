@@ -1,7 +1,6 @@
 /*
 	File: WinAPICS207Project.cpp
 	Purpose: Entry point to the program
-	Date: 28th Nov. 2018
 */
 
 
@@ -13,8 +12,11 @@
 
 
 
-//
+// Bitwise process the incoming serial data
 void ProcessSerial(const uint32 &);
+
+// Send the specified lists of inputs
+void SendInputs(const std::string &, const std::string &);
 
 // Print a user friendly version of COM ports currently in use
 void EnumerateSerialPortsFriendlyNames();
@@ -51,7 +53,21 @@ int _tmain(int argc, TCHAR *argv[])
 	Serial* SP = new Serial(ComPortName);
 	if (SP->IsConnected())
 	{
-		tcout << _TEXT("Connected to port ") << ComPortName << std::endl;
+		// Delay to give the Arduino time to reset
+		// Also print a waiting message
+		for (int i = 0; i < ARDUINO_DELAY_CYCLES; ++i)
+		{
+			uint8 NumDots = 3;
+			tcout << _TEXT("\rPlease wait" + std::string(NumDots, ' '));
+			for (int j = 0; j < NumDots; ++j)
+			{
+				Sleep(WAIT_MSG_DELAY_MS);
+				tcout << _TEXT("\rPlease wait" + std::string(j + 1, '.'));
+			}
+			Sleep(WAIT_MSG_DELAY_MS);
+		}
+
+		tcout << _TEXT("\rConnected to port ") << ComPortName << std::endl;
 	}
 
 	// Read the incoming data from the COM port while it remains connected
@@ -67,26 +83,29 @@ int _tmain(int argc, TCHAR *argv[])
 		{
 			continue;
 		}
+		
+		IncomingData[ReadResult] = 0;
+		
+		// Convert the incoming char array into an integer
+		std::stringstream IncomingStream{ IncomingData };
+		uint32 IncomingInteger{};
+		IncomingStream >> IncomingInteger;
 
 #if DEBUG
 		uint64 clock_start{ __rdtsc() };
 #endif
-
-		// Ensure there is no null terminator
-		IncomingData[ReadResult] = 0;
-
-		LOG(_TEXT(IncomingData));
-
+		
 		// Prevent communication errors by requiring the same input
 		// for at least two loops before being processed
-		local_persist std::string PrevIncomingData{};
-		if (IncomingData != PrevIncomingData)
+		local_persist uint32 PrevIncomingInteger{ 0x0 };
+		if (IncomingInteger != PrevIncomingInteger)
 		{
-			PrevIncomingData = IncomingData;
+			PrevIncomingInteger = IncomingInteger;
 			continue;
 		}
 
-		ProcessSerial(strtoul(IncomingData, nullptr, NULL));
+		// Process the input
+		ProcessSerial(IncomingInteger);
 
 #if DEBUG
 		uint64 clock_end{ __rdtsc() };
@@ -100,16 +119,279 @@ int _tmain(int argc, TCHAR *argv[])
 
 
 
-//
+// Bitwise process the incoming serial data
 void ProcessSerial(const uint32 & Serial)
 {
-	tcout << Serial << std::endl;
+	LOG(Serial, _TEXT("\n"));
+
+	// Keep track of button presses and releases
+	// There is no need to constantly send keydown commands,
+	// only send one keydown when pressed and a keyup when released.
+	local_persist bool Was_A{ false };
+	local_persist bool Was_B{ false };
+	local_persist bool Was_Z{ false };
+	local_persist bool Was_START{ false };
+	local_persist bool Was_LB{ false };
+	local_persist bool Was_RB{ false };
+	local_persist bool Was_C_LEFT{ false };
+	local_persist bool Was_C_UP{ false };
+	local_persist bool Was_C_RIGHT{ false };
+	local_persist bool Was_C_DOWN{ false };
+	local_persist bool Was_D_LEFT{ false };
+	local_persist bool Was_D_UP{ false };
+	local_persist bool Was_D_RIGHT{ false };
+	local_persist bool Was_D_DOWN{ false };
+	local_persist bool Was_JOY_LEFT{ false };
+	local_persist bool Was_JOY_RIGHT{ false };
+	local_persist bool Was_JOY_DOWN{ false };
+	local_persist bool Was_JOY_UP{ false };
+
+	std::string KeyDown{};
+	std::string KeyUp{};
+
+	/*
+		Check if the inputs are active via bitwise operations
+		on the incoming serial data.
+		If it is active and was not already pressed, send a keydown command.
+		if it is not active and was previously active, send a keyup command.
+		Else, do nothing.
+	*/
+
+	if ((Serial & A) && !Was_A)
+	{
+		KeyDown += 'V';
+		Was_A = true;
+	}
+	else if (Was_A && !(Serial & A))
+	{
+		KeyUp += 'V';
+		Was_A = false;
+	}
+
+	if ((Serial & B) && !Was_B)
+	{
+		KeyDown += 'C';
+		Was_B = true;
+	}
+	else if (Was_B && !(Serial & B))
+	{
+		KeyUp += 'C';
+		Was_B = false;
+	}
+
+	if ((Serial & Z) && !Was_Z)
+	{
+		KeyDown += 'Z';
+		Was_Z = true;
+	}
+	else if (Was_Z && !(Serial & Z))
+	{
+		KeyUp += 'Z';
+		Was_Z = false;
+	}
+
+	if ((Serial & START) && !Was_START)
+	{
+		KeyDown += 'R';
+		Was_START = true;
+	}
+	else if (Was_START && !(Serial & START))
+	{
+		KeyUp += 'R';
+		Was_START = false;
+	}
+
+	if ((Serial & LB) && !Was_LB)
+	{
+		KeyDown += 'Q';
+		Was_LB = true;
+	}
+	else if (Was_LB && !(Serial & LB))
+	{
+		KeyUp += 'Q';
+		Was_LB = false;
+	}
+
+	if ((Serial & RB) && !Was_RB)
+	{
+		KeyDown += 'E';
+		Was_RB = true;
+	}
+	else if (Was_RB && !(Serial & RB))
+	{
+		KeyUp += 'E';
+		Was_RB = false;
+	}
+
+	if ((Serial & C_LEFT) && !Was_C_LEFT)
+	{
+		KeyDown += 'J';
+		Was_C_LEFT = true;
+	}
+	else if (Was_C_LEFT && !(Serial & C_LEFT))
+	{
+		KeyUp += 'J';
+		Was_C_LEFT = false;
+	}
+
+	if ((Serial & C_UP) && !Was_C_UP)
+	{
+		KeyDown += 'I';
+		Was_C_UP = true;
+	}
+	else if (Was_C_UP && !(Serial & C_UP))
+	{
+		KeyUp += 'I';
+		Was_C_UP = false;
+	}
+
+	if ((Serial & C_RIGHT) && !Was_C_RIGHT)
+	{
+		KeyDown += 'L';
+		Was_C_RIGHT = true;
+	}
+	else if (Was_C_RIGHT && !(Serial & C_RIGHT))
+	{
+		KeyUp += 'L';
+		Was_C_RIGHT = false;
+	}
+
+	if ((Serial & C_DOWN) && !Was_C_DOWN)
+	{
+		KeyDown += 'K';
+		Was_C_DOWN = true;
+	}
+	else if (Was_C_DOWN && !(Serial & C_DOWN))
+	{
+		KeyUp += 'K';
+		Was_C_DOWN = false;
+	}
+
+	if ((Serial & D_LEFT) && !Was_D_LEFT)
+	{
+		KeyDown += 'F';
+		Was_D_LEFT = true;
+	}
+	else if (Was_D_LEFT && !(Serial & D_LEFT))
+	{
+		KeyUp += 'F';
+		Was_D_LEFT = false;
+	}
+
+	if ((Serial & D_UP) && !Was_D_UP)
+	{
+		KeyDown += 'T';
+		Was_D_UP = true;
+	}
+	else if (Was_D_UP && !(Serial & D_UP))
+	{
+		KeyUp += 'T';
+		Was_D_UP = false;
+	}
+
+	if ((Serial & D_RIGHT) && !Was_D_RIGHT)
+	{
+		KeyDown += 'H';
+		Was_D_RIGHT = true;
+	}
+	else if (Was_D_RIGHT && !(Serial & D_RIGHT))
+	{
+		KeyUp += 'H';
+		Was_D_RIGHT = false;
+	}
+
+	if ((Serial & D_DOWN) && !Was_D_DOWN)
+	{
+		KeyDown += 'G';
+		Was_D_DOWN = true;
+	}
+	else if (Was_D_DOWN && !(Serial & D_DOWN))
+	{
+		KeyUp += 'G';
+		Was_D_DOWN = false;
+	}
+
+	if ((Serial & JOY_LEFT) && !Was_JOY_LEFT)
+	{
+		KeyDown += 'A';
+		Was_JOY_LEFT = true;
+	}
+	else if (Was_JOY_LEFT && !(Serial & JOY_LEFT))
+	{
+		KeyUp += 'A';
+		Was_JOY_LEFT = false;
+	}
+
+	if ((Serial & JOY_RIGHT) && !Was_JOY_RIGHT)
+	{
+		KeyDown += 'D';
+		Was_JOY_RIGHT = true;
+	}
+	else if (Was_JOY_RIGHT && !(Serial & JOY_RIGHT))
+	{
+		KeyUp += 'D';
+		Was_JOY_RIGHT = false;
+	}
+
+	if ((Serial & JOY_DOWN) && !Was_JOY_DOWN)
+	{
+		KeyDown += 'S';
+		Was_JOY_DOWN = true;
+	}
+	else if (Was_JOY_DOWN && !(Serial & JOY_DOWN))
+	{
+		KeyUp += 'S';
+		Was_JOY_DOWN = false;
+	}
+
+	if ((Serial & JOY_UP) && !Was_JOY_UP)
+	{
+		KeyDown += 'W';
+		Was_JOY_UP = true;
+	}
+	else if (Was_JOY_UP && !(Serial & JOY_UP))
+	{
+		KeyUp += 'W';
+		Was_JOY_UP = false;
+	}
+
+	// Send the inputs
+	SendInputs(KeyDown, KeyUp);
 }
 
 
 
 
-// Author: Leherenn at https://stackoverflow.com/questions/304986/how-do-i-get-the-friendly-name-of-a-com-port-in-windows
+// Send the specified lists of inputs
+void SendInputs(const std::string & KeyDown, const std::string & KeyUp)
+{
+	INPUT ip{};
+	ip.type = INPUT_KEYBOARD;
+
+	// Go through the range of characters and send each one
+	for (const char & c : KeyDown)
+	{
+		LOG(_TEXT(c));
+		ip.ki.dwFlags = KEYEVENTF_SCANCODE;
+		ip.ki.wScan = static_cast<WORD>(MapVirtualKey(c, MAPVK_VK_TO_VSC));
+
+		SendInput(1, &ip, sizeof(INPUT));
+	}
+	for (const char & c : KeyUp)
+	{
+		LOG(_TEXT(c));
+		ip.ki.dwFlags = KEYEVENTF_SCANCODE | KEYEVENTF_KEYUP;
+		ip.ki.wScan = static_cast<WORD>(MapVirtualKey(c, MAPVK_VK_TO_VSC));
+
+		SendInput(1, &ip, sizeof(INPUT));
+	}
+}
+
+
+
+
+// Enumerate over all active COM ports and print user-friendly names
+// Original from: https://stackoverflow.com/a/45613884
 void EnumerateSerialPortsFriendlyNames()
 {
 	SP_DEVINFO_DATA devInfoData = {};
