@@ -6,6 +6,10 @@ Introduction
 -
 This repository demonstrates my attempt to create a video game controller with Arduino. A user created controller is connected to the Arduino. This controller sends its inputs to the Arduino which in turn then sends data to the target computer via USB. An intermediate C++ program employs the Windows API to then read these inputs from the COM port and send the corresponding inputs to the most foreground application.
 
+![alt text][pic2]
+
+[pic2]: https://github.com/MattMan569/CS207Project/blob/master/img/build_picture.jpg "CS 207 Build Picture"
+
 How It Works
 -
 <b>Controller:</b><br />
