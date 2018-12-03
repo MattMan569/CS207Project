@@ -56,8 +56,6 @@ Build Instructions
 
 Usage
 -
-This is usually where you tell the user how the device works. Do you just upload the software and flip a switch? What sort of things does this thing do? Are there alternate settings / modes / programs that might be good to mention. This is where you tell the user exactly how the device or program is used. For example: 
-
 * Plug the Arduino into the target Windows computer via USB
 * Start the intermediate C++ program on the target computer
 * Select the COM port the Arduino is connected to in the C++ program
